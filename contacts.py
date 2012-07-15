@@ -1,3 +1,5 @@
+import sys
+import argparse
 import csv
 import json
 
@@ -33,3 +35,16 @@ def save_json(contacts, contactsFile):
 		contactsFile = open(contactsFile, 'w')
 	json.dump(contacts, contactsFile,
 		indent=2, separators=(',',': '), sort_keys=True)
+
+def main():
+	parser = argparse.ArgumentParser(
+		description='Converts contacts information from CSV to JSON format.')
+	parser.add_argument('SOURCE', type=argparse.FileType('r'),
+		help='CSV file to read contacts from')
+	parser.add_argument('DEST', type=argparse.FileType('w'),
+		help='JSON file to save contacts to')
+	args = parser.parse_args();
+	save_json(load_csv(args.SOURCE), args.DEST)
+
+if __name__ == "__main__":
+	sys.exit(main())
