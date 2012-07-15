@@ -1,4 +1,5 @@
 import csv
+import json
 
 def load_csv(contactsFile):
 	"""
@@ -19,3 +20,16 @@ def load_csv(contactsFile):
 				contact[key] = value
 		contacts.append(contact)
 	return contacts
+
+def save_json(contacts, contactsFile):
+	"""
+	Save contacts as JSON.
+
+	@param contacts - the contacts to save.
+	@param contactsFile - the file to which to save,
+	or the path to a file that will be opened.
+	"""
+	if isinstance(contactsFile, basestring):
+		contactsFile = open(contactsFile, 'w')
+	json.dump(contacts, contactsFile,
+		indent=2, separators=(',',': '), sort_keys=True)
