@@ -1,0 +1,5 @@
+# Python compiled files
+*.py[cod]
+
+# vim swap files
+.*.sw[a-z]
