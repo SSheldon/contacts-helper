@@ -12,14 +12,8 @@ def load_csv(contactsFile):
 	@return a list of dicts of contact information.
 	"""
 	reader = csv.DictReader(contactsFile)
-	contacts = []
-	for row in reader:
-		contact = {}
-		for key, value in row.iteritems():
-			if value and not str.isspace(value):
-				contact[key] = value
-		contacts.append(contact)
-	return contacts
+	return [dict((k, v) for k, v in row.iteritems() if v and not str.isspace(v))
+		for row in reader]
 
 def save_csv(contacts, contactsFile, fieldNames=None):
 	"""
