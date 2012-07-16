@@ -20,6 +20,20 @@ def load_csv(contactsFile):
 		contacts.append(contact)
 	return contacts
 
+def save_csv(contacts, contactsFile, fieldNames=None):
+	"""
+	Save contacts as CSV.
+
+	@param contacts - the contacts to save.
+	@param contactsFile - the file to which to save.
+	@param fieldNames - the names of the fields to use in the header.
+	"""
+	if not fieldNames:
+		fieldNames = set(key for contact in contacts for key in contact)
+	writer = csv.DictWriter(contactsFile, fieldNames)
+	writer.writeheader()
+	writer.writerows(contacts)
+
 def save_json(contacts, contactsFile):
 	"""
 	Save contacts as JSON.
