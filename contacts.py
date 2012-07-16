@@ -60,9 +60,9 @@ def save_json(contacts, contactsFile):
 def main():
 	parser = argparse.ArgumentParser(
 		description='Converts contacts information from CSV to JSON format.')
-	parser.add_argument('SOURCE', type=argparse.FileType('r'),
+	parser.add_argument('SOURCE', type=argparse.FileType('rb'),
 		help='CSV file to read contacts from')
-	parser.add_argument('DEST', type=argparse.FileType('w'),
+	parser.add_argument('DEST', type=argparse.FileType('wb'),
 		help='JSON file to save contacts to')
 	args = parser.parse_args();
 	save_json(load_csv(args.SOURCE), args.DEST)
