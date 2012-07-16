@@ -58,7 +58,7 @@ def main():
 		help='CSV file to read contacts from')
 	parser.add_argument('DEST', type=argparse.FileType('wb'),
 		help='JSON file to save contacts to')
-	args = parser.parse_args();
+	args = parser.parse_args()
 	save_json(load_csv(args.SOURCE), args.DEST)
 
 if __name__ == "__main__":
