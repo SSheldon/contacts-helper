@@ -1,4 +1,5 @@
 import sys
+import os
 import argparse
 import csv
 import json
@@ -33,6 +34,18 @@ def save_csv(contacts, contactsFile, fieldNames=None):
 	writer = csv.DictWriter(contactsFile, fieldNames)
 	writer.writeheader()
 	writer.writerows(contacts)
+
+def save_csv_outlook(contacts, contactsFile):
+	"""
+	Save contacts as CSV with a header of Outlook field names.
+
+	@param contacts - the contacts to save.
+	@param contactsFile - the file to which to save.
+	"""
+	name = os.path.join(os.path.dirname(__file__), 'outlook_fields.txt')
+	with open(name) as fieldNamesFile:
+		fieldNames = fieldNamesFile.read().splitlines()
+	save_csv(contacts, contactsFile, fieldNames)
 
 def save_json(contacts, contactsFile):
 	"""
