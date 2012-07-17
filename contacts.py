@@ -12,7 +12,7 @@ def load_csv(contactsFile):
 	@return a list of dicts of contact information.
 	"""
 	reader = csv.DictReader(contactsFile)
-	return [dict((k, v) for k, v in row.iteritems() if v and not str.isspace(v))
+	return [{k: v for k, v in row.iteritems() if v and not str.isspace(v)}
 		for row in reader]
 
 def save_csv(contacts, contactsFile, fieldNames=None):
@@ -24,7 +24,7 @@ def save_csv(contacts, contactsFile, fieldNames=None):
 	@param fieldNames - the names of the fields to use in the header.
 	"""
 	if not fieldNames:
-		fieldNames = set(key for contact in contacts for key in contact)
+		fieldNames = {key for contact in contacts for key in contact}
 	writer = csv.DictWriter(contactsFile, fieldNames)
 	writer.writeheader()
 	writer.writerows(contacts)
